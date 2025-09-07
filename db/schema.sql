@@ -20,3 +20,5 @@ CREATE TABLE IF NOT EXISTS `Contacts` (
     `UserID`        INT NOT NULL DEFAULT '0',
     PRIMARY KEY(`ID`)
 ) ENGINE = InnoDB;
+
+ALTER TABLE `Users` ADD UNIQUE (`Login`); 
