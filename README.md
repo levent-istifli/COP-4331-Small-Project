@@ -50,7 +50,7 @@ Request:
     "firstname": "John",
     "lastname": "Smith",
     "login": "jsmith",
-    "password": "thisisgroup21"; 
+    "password": "thisisgroup21" 
 }
 ```
 
