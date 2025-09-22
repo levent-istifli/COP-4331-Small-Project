@@ -1,117 +1,100 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: This is a simple API
+  description: API documentation of Team 21's Contact Manager
   version: 1.0.0
-  title: Simple Inventory API
+  title: Contact Manager
   contact:
-    email: you@your-company.com
+    email: gradimbuyi@outlook.com
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+
 tags:
-- name: admins
-  description: Secured Admin-only calls
-- name: developers
-  description: Operations available to regular developers
+- name: users
+  description: Operations avaiable to regular users
+
 paths:
-  /inventory:
-    get:
-      tags:
-      - developers
-      summary: searches inventory
-      description: |
-        By passing in the appropriate options, you can search for
-        available inventory in the system
-      operationId: searchInventory
-      produces:
-      - application/json
-      parameters:
-      - name: searchString
-        in: query
-        description: pass an optional search string for looking up inventory
-        required: false
-        type: string
-      - name: skip
-        in: query
-        description: number of records to skip for pagination
-        required: false
-        type: integer
-        minimum: 0
-        format: int32
-      - name: limit
-        in: query
-        description: maximum number of records to return
-        required: false
-        type: integer
-        maximum: 50
-        minimum: 0
-        format: int32
-      responses:
-        "200":
-          description: search results matching criteria
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/InventoryItem"
-        "400":
-          description: bad input parameter
+  /signup.php:
     post:
       tags:
-      - admins
-      summary: adds an inventory item
-      description: Adds an item to the system
-      operationId: addInventory
-      consumes:
-      - application/json
+      - users
+      summary: creates new user
+      operationId: handleLogin
+      description: |
+        Takes for input user's first name, last name,  username, 
+        and password. By passing in these options, user are 
+        added to database, enabling them to manage contact 
+        information.
       produces:
       - application/json
       parameters:
       - in: body
-        name: inventoryItem
-        description: Inventory item to add
-        required: false
-        schema:
-          $ref: "#/definitions/InventoryItem"
+        name: AddUser 
+        description: adds a user in the database
+        schema: 
+          $ref: '#/definitions/signup'
       responses:
-        "201":
-          description: item created
-        "400":
-          description: "invalid input, object invalid"
-        "409":
-          description: an existing item already exists
+        200:
+          description: user has been created
+        400:
+          description: bad input parameters
+        501:
+          description: server error
+  /login.php:
+    post: 
+      tags:
+      - users
+      summary: login to existing user account
+      operationId: handleSignUp
+      description: |
+        Takes for input user's username and password. By passing
+        in these options, user are able to retrieve their account.
+      produces:
+      - applicaation/json
+      parameters:
+      - in: body
+        name: RetrieveUser
+        description: search and return user account
+        schema:
+          $ref: '#/definitions/login'
+      responses:
+        200:
+          description: user was found
+        400:
+          description: incorrect username or password
+        501:
+          description: server error
 definitions:
-  InventoryItem:
+  signup:
+    type: object
+    required: 
+    - firstname
+    - lastname
+    - login
+    - password
+    properties:
+      firstname:
+        type: string
+        example: David
+      lastname:
+        type: string
+        example: Branch
+      login:
+        type: string
+        example: dbranch
+      password:
+        type: string
+        example: thisisa582password
+  login:
     type: object
     required:
-    - id
-    - manufacturer
-    - name
-    - releaseDate
+    - login
+    - password
     properties:
-      id:
+      login:
         type: string
-        format: uuid
-        example: d290f1ee-6c54-4b01-90e6-d701748f0851
-      name:
+        example: dbranch
+      password:
         type: string
-        example: Widget Adapter
-      releaseDate:
-        type: string
-        format: date-time
-        example: 2016-08-29T09:12:33.001Z
-      manufacturer:
-        $ref: "#/definitions/Manufacturer"
-  Manufacturer:
-    required:
-    - name
-    properties:
-      name:
-        type: string
-        example: ACME Corporation
-      homePage:
-        type: string
-        format: url
-        example: https://www.acme-corp.com
-      phone:
-        type: string
-        example: 408-867-5309
+        example: thisisa582password
