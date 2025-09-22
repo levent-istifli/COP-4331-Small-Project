@@ -91,6 +91,33 @@ paths:
           description: contact was not added
         501:
           description: server error
+  /delete_contact.php:
+    post:
+      tags:
+      - users
+      summary: delete contact from user's list
+      operationId: DeleteContact
+      description: |
+        Takes for input the contact's id and the user's id. If contact is
+        in user's contact list, it deletes the contact.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: DeleteContact
+        description: delete contact info from user account
+        schema:
+          $ref: '#/definitions/deletecontact'
+      responses:
+        200:
+          description: contact was deleted
+        400:
+          description: contact was not found/deleted
+        501:
+          description: server error
+    
 definitions:
   signup:
     type: object
@@ -148,3 +175,15 @@ definitions:
       email:
         type: string
         example: dbranch420@hotmail.fr
+  deletecontact:
+    type: object
+    required:
+    - userid
+    - id
+    properties:
+      userid: 
+        type: integer
+        example: 255
+      id:
+        type: integer
+        example: 63
