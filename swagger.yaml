@@ -65,6 +65,32 @@ paths:
           description: incorrect username or password
         501:
           description: server error
+  /add_contact.php:
+    post:
+      tags:
+      - users
+      summary: add contact to user's list
+      operationId: AddContact
+      description: |
+        Takes for input the contact's name, phone number, and email. Users 
+        can then save these information in their account.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: AddContact
+        description: stores contact info in user account
+        schema:
+          $ref: '#/definitions/addcontact'
+      responses:
+        200:
+          description: contact was added
+        400:
+          description: contact was not added
+        501:
+          description: server error
 definitions:
   signup:
     type: object
@@ -98,3 +124,27 @@ definitions:
       password:
         type: string
         example: thisisa582password
+  addcontact:
+    type: object
+    required:
+    - userid
+    - firstname
+    - lastname
+    - phonenumber
+    - emai
+    properties:
+      userid:
+        type: integer
+        example: 255
+      firstname:
+        type: string
+        example: David
+      lastname:
+        type: string
+        example: Branch
+      phonenumber:
+        type: string
+        example: 407-773-6622
+      email:
+        type: string
+        example: dbranch420@hotmail.fr
