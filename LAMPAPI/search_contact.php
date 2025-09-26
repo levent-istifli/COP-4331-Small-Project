@@ -25,8 +25,8 @@
         $search = "%".$in_data["search"]."%";
         // prepares statements to add user. checks if user already exists. add user to db if user does
         // not exists, otherwise returns error message
-        $stmt = $conn->prepare("SELECT ID, FirstName, LastName, PhoneNumber, Email FROM Contacts WHERE CONCAT(FirstName, \" \", LastName) LIKE ? AND UserID = ?");
-        $stmt->bind_param("si", $search, $in_data["userid"]);
+        $stmt = $conn->prepare("SELECT ID, FirstName, LastName, PhoneNumber, Email FROM Contacts WHERE (CONCAT(FirstName, \" \", LastName) LIKE ? OR Email LIKE ? OR PhoneNumber LIKE ?) AND UserID = ?");
+        $stmt->bind_param("sssi", $search, $search, $search, $in_data["userid"]);
         
         try {
             $stmt->execute();
