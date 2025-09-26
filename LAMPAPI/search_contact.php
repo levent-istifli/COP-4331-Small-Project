@@ -22,14 +22,20 @@
                 exit();
             }
         } 
-
+        $search = "%".$in_data["search"]."%";
         // prepares statements to add user. checks if user already exists. add user to db if user does
         // not exists, otherwise returns error message
-        $conn->prepare("SELECT ID, FirstName, LastName, PhoneNumber, Email FROM Users WHERE CONCAT(FirstName, \" \", LastName) LIKE ? AND UserID = ?");
-        $stmt->bind_param("si", $in_data["search"], $in_data["userid"]);
-
+        $stmt = $conn->prepare("SELECT ID, FirstName, LastName, PhoneNumber, Email FROM Contacts WHERE CONCAT(FirstName, \" \", LastName) LIKE ? AND UserID = ?");
+        $stmt->bind_param("si", $search, $in_data["userid"]);
+        
         try {
             $stmt->execute();
+            $result = $stmt->get_result();
+            $contacts = [];
+            while ($row = $result->fetch_assoc()) {
+                $contacts[] = $row;
+            }
+            sendResultInfoAsJson(json_encode($contacts));
             returnWithError("");
 
         } catch(mysqli_sql_exception $exception) {
