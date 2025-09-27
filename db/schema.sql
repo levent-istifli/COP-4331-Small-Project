@@ -21,4 +21,10 @@ CREATE TABLE IF NOT EXISTS `Contacts` (
     PRIMARY KEY(`ID`)
 ) ENGINE = InnoDB;
 
+/* modify user username rules. database can only have a unique 
+ * username */
 ALTER TABLE `Users` ADD UNIQUE (`Login`); 
+
+/* add foreign key constraint to user id on Contacts table. */
+ALTER TABLE `Contacts` ADD CONSTRAINT `fk_contacts_user_id`
+FOREIGN KEY (`UserID`) REFERENCES `Users`(`ID`);
