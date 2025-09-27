@@ -1,8 +1,15 @@
 <?php
-
     // This file is required to access the database. In it are sensitive database information, including 
     // the host's ip address, the user, the database password, and database name
     require __DIR__ . "/../config.php";
+
+    // API KEY CHECK
+    $api_key = getallheaders()['x-api-key'] ?? '';
+    if($api_key !== API_KEY) {
+        http_response_code(401);
+        returnWithError("Unauthorized access to API");
+        exit;
+    }
 
     $in_data = json_decode(file_get_contents('php://input'), true);
     $id = 0;    $first_name = "";   $last_name  = "";
