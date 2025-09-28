@@ -1,189 +1,281 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  description: API documentation of Team 21's Contact Manager
-  version: 1.0.0
-  title: Contact Manager
-  contact:
-    email: gradimbuyi@outlook.com
+    description: API documentation of Team 21's Contact Manager
+    version: 1.0.0
+    title: Contact Manager
+    contact:
+        email: gradimbuyi@outlook.com
 
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 tags:
-- name: users
-  description: Operations avaiable to regular users
+    - name: users
+      description: Operations avaiable to regular users
 
 paths:
-  /signup.php:
-    post:
-      tags:
-      - users
-      summary: creates new user
-      operationId: handleLogin
-      description: |
-        Takes for input user's first name, last name,  username, 
-        and password. By passing in these options, user are 
-        added to database, enabling them to manage contact 
-        information.
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: AddUser 
-        description: adds a user in the database
-        schema: 
-          $ref: '#/definitions/signup'
-      responses:
-        200:
-          description: user has been created
-        400:
-          description: bad input parameters
-        501:
-          description: server error
-  /login.php:
-    post: 
-      tags:
-      - users
-      summary: login to existing user account
-      operationId: handleSignUp
-      description: |
-        Takes for input user's username and password. By passing
-        in these options, user are able to retrieve their account.
-      produces:
-      - applicaation/json
-      parameters:
-      - in: body
-        name: RetrieveUser
-        description: search and return user account
-        schema:
-          $ref: '#/definitions/login'
-      responses:
-        200:
-          description: user was found
-        400:
-          description: incorrect username or password
-        501:
-          description: server error
-  /add_contact.php:
-    post:
-      tags:
-      - users
-      summary: add contact to user's list
-      operationId: AddContact
-      description: |
-        Takes for input the contact's name, phone number, and email. Users 
-        can then save these information in their account.
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: AddContact
-        description: stores contact info in user account
-        schema:
-          $ref: '#/definitions/addcontact'
-      responses:
-        200:
-          description: contact was added
-        400:
-          description: contact was not added
-        501:
-          description: server error
-  /delete_contact.php:
-    post:
-      tags:
-      - users
-      summary: delete contact from user's list
-      operationId: DeleteContact
-      description: |
-        Takes for input the contact's id and the user's id. If contact is
-        in user's contact list, it deletes the contact.
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: DeleteContact
-        description: delete contact info from user account
-        schema:
-          $ref: '#/definitions/deletecontact'
-      responses:
-        200:
-          description: contact was deleted
-        400:
-          description: contact was not found/deleted
-        501:
-          description: server error
-    
+    /signup.php:
+        post:
+            tags:
+                - users
+            summary: creates new user
+            operationId: handleLogin
+            description: |
+                Takes for input user's first name, last name,  username, 
+                and password. By passing in these options, user are 
+                added to database, enabling them to manage contact 
+                information.
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: AddUser
+                  description: adds a user in the database
+                  schema:
+                      $ref: "#/definitions/signup"
+            responses:
+                200:
+                    description: user has been created
+                400:
+                    description: bad input parameters
+                501:
+                    description: server error
+    /login.php:
+        post:
+            tags:
+                - users
+            summary: login to existing user account
+            operationId: handleSignUp
+            description: |
+                Takes for input user's username and password. By passing
+                in these options, user are able to retrieve their account.
+            produces:
+                - applicaation/json
+            parameters:
+                - in: body
+                  name: RetrieveUser
+                  description: search and return user account
+                  schema:
+                      $ref: "#/definitions/login"
+            responses:
+                200:
+                    description: user was found
+                400:
+                    description: incorrect username or password
+                501:
+                    description: server error
+    /add_contact.php:
+        post:
+            tags:
+                - users
+            summary: add contact to user's list
+            operationId: AddContact
+            description: |
+                Takes for input the contact's name, phone number, and email. Users 
+                can then save these information in their account.
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: AddContact
+                  description: stores contact info in user account
+                  schema:
+                      $ref: "#/definitions/addcontact"
+            responses:
+                200:
+                    description: contact was added
+                400:
+                    description: contact was not added
+                501:
+                    description: server error
+    /delete_contact.php:
+        post:
+            tags:
+                - users
+            summary: delete contact from user's list
+            operationId: DeleteContact
+            description: |
+                Takes for input the contact's id and the user's id. If contact is
+                in user's contact list, it deletes the contact.
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: DeleteContact
+                  description: delete contact info from user account
+                  schema:
+                      $ref: "#/definitions/deletecontact"
+            responses:
+                200:
+                    description: contact was deleted
+                400:
+                    description: contact was not found/deleted
+                501:
+                    description: server error
+    /update_contact.php:
+        post:
+            tags:
+                - users
+            summary: update contact info
+            operationId: UpdateContact
+            description: |
+                Takes for input the contact's id, user's id, first name, last name
+                phone number, and email. If contact is in user's list, update the
+                contact.
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: UpdateContact
+                  description: update contact info from user account
+                  schema:
+                      $ref: "#/definitions/updatecontact"
+            responses:
+                200:
+                    description: contact was updated
+                400:
+                    description: contact was not found
+                501:
+                    description: server error
+    /search_contact.php:
+        get:
+            tags:
+                - users
+            summary: search for contact info
+            operationId: SearchContact
+            description: |
+                Takes for input the user's id and a search term. Search for 
+                contact in user's list.
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: SearchContact
+                  description: search contact info from user account
+                  schema:
+                      $ref: "#/definitions/searchcontact"
+            responses:
+                200:
+                    description: contact list is returned
+                400:
+                    description: contact list was not returned
+                501:
+                    description: server error
 definitions:
-  signup:
-    type: object
-    required: 
-    - firstname
-    - lastname
-    - login
-    - password
-    properties:
-      firstname:
-        type: string
-        example: David
-      lastname:
-        type: string
-        example: Branch
-      login:
-        type: string
-        example: dbranch
-      password:
-        type: string
-        example: thisisa582password
-  login:
-    type: object
-    required:
-    - login
-    - password
-    properties:
-      login:
-        type: string
-        example: dbranch
-      password:
-        type: string
-        example: thisisa582password
-  addcontact:
-    type: object
-    required:
-    - userid
-    - firstname
-    - lastname
-    - phonenumber
-    - emai
-    properties:
-      userid:
-        type: integer
-        example: 255
-      firstname:
-        type: string
-        example: David
-      lastname:
-        type: string
-        example: Branch
-      phonenumber:
-        type: string
-        example: 407-773-6622
-      email:
-        type: string
-        example: dbranch420@hotmail.fr
-  deletecontact:
-    type: object
-    required:
-    - userid
-    - id
-    properties:
-      userid: 
-        type: integer
-        example: 255
-      id:
-        type: integer
-        example: 63
+    signup:
+        type: object
+        required:
+            - firstname
+            - lastname
+            - login
+            - password
+        properties:
+            firstname:
+                type: string
+                example: David
+            lastname:
+                type: string
+                example: Branch
+            login:
+                type: string
+                example: dbranch
+            password:
+                type: string
+                example: thisisa582password
+    login:
+        type: object
+        required:
+            - login
+            - password
+        properties:
+            login:
+                type: string
+                example: dbranch
+            password:
+                type: string
+                example: thisisa582password
+    addcontact:
+        type: object
+        required:
+            - userid
+            - firstname
+            - lastname
+            - phonenumber
+            - emai
+        properties:
+            userid:
+                type: integer
+                example: 255
+            firstname:
+                type: string
+                example: David
+            lastname:
+                type: string
+                example: Branch
+            phonenumber:
+                type: string
+                example: 407-773-6622
+            email:
+                type: string
+                example: dbranch420@hotmail.fr
+    deletecontact:
+        type: object
+        required:
+            - userid
+            - id
+        properties:
+            userid:
+                type: integer
+                example: 255
+            id:
+                type: integer
+                example: 63
+    updatecontact:
+        type: object
+        required:
+            - userid
+            - firstname
+            - lastname
+            - phonenumber
+            - email
+            - id
+        properties:
+            userid:
+                type: integer
+                example: 25
+            firstname:
+                type: string
+                example: David
+            lastname:
+                type: string
+                example: Branch
+            phonenumber:
+                type: string
+                example: 407-773-6622
+            email:
+                type: string
+                example: dbranch420@hotmail.fr
+            id:
+                type: integer
+                example: 5
+    searchcontact:
+        type: object
+        required:
+            - userid
+            - search
+        properties:
+            userid:
+                type: integer
+                example: 420
+            search:
+                type: string
+                example: Da
