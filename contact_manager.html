@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Contact Manager - Team 21</title>
+</head>
+<body>
+   
+
+    <!--  Start of the first container */  -->
+
+    <div class="operation-container">
+        <div class="login-header">
+		<h1 id="greeting"></h1>
+        </div>
+
+        <form id="Search Contacts">
+            <div class="input-group">
+                <label for="sfirstname">Search Contacts</label>
+                <input type="text" id="sfirstname" name="sfirstname" placeholder="Enter first name" required>
+            </div>
+
+	    <div class="input-group">
+                <label for="searchlastname"></label>
+                <input type="text" id="searchlastname" name="searchlastname" placeholder="Enter last name" required>
+            </div>
+
+
+            <div class="input-group">
+                <label for="searchemail"></label>
+                <input type="text" id="searchemail" name="searchemail" placeholder="Enter email" required>
+            </div>
+
+	    <div class="input-group">
+                <label for="searchphonenumber"></label>
+                <input type="text" id="searchphonenumber" name="searchphonenumber" placeholder="Enter phone number or area code" required>
+            </div>
+
+
+            <div class="button-container">
+                <button type="button" class="btn btn-add" id="addBtn" onclick="handleAddForm()">
+                    Add new contact
+                </button>
+		<button type="button" class="btn btn-login" id="srchBtn" onclick="handleSearch()">
+                    Search contacts
+                </button>
+            </div>
+
+            <div id="message" class="message"></div>
+        </form>
+    </div>
+
+    <!-- Start of the second main container*/  -->
+
+    <div id="searchinfo">
+
+    </div>
+
+    <div id="contactinput" class="operation-container" style="display: none;">
+        <div class="login-header">
+            <h1>Enter contact information</h1>
+        </div>
+
+	<form id="Search Contacts">
+            <div class="input-group">
+                <label for="addfirstname">Enter complete information</label>
+                <input type="text" id="addfirstname" name="addfirstname" placeholder="Jack" required>
+            </div>
+
+	    <div class="input-group">
+                <label for="addlastname"></label>
+                <input type="text" id="addlastname" name="addlastname" placeholder="Smith" required>
+            </div>
+
+
+            <div class="input-group">
+                <label for="addemail"></label>
+                <input type="text" id="addemail" name="addemail" placeholder="myemail@domain.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="addphonenumber"></label>
+                <input type="text" id="addphonenumber" name="addphonenumber" placeholder="123-456-7890" required>
+            </div>
+
+
+            <div class="button-container">
+		<button type="button" class="btn btn-back" id="backbtn" onclick="returnToSearch()">
+                   Back
+                </button>
+                <button type="button" class="btn btn-add" id="addBtn" onclick="handleAddContact()">
+			Complete
+		</button>
+            </div>
+        </form>
+
+    </div>
+    <div id="contactedit" class="operation-container" style="display: none;">
+        <div class="login-header">
+            <h1>Edit contact information</h1>
+        </div>
+
+        <form id="Search Contacts">
+            <div class="input-group">
+                <label for="editfirstname">Enter complete information</label>
+                <input type="text" id="editfirstname" name="editfirstname" placeholder="Jack" required>
+            </div>
+
+            <div class="input-group">
+                <label for="editlastname"></label>
+                <input type="text" id="editlastname" name="editlastname" placeholder="Smith" required>
+            </div>
+
+
+            <div class="input-group">
+                <label for="editemail"></label>
+                <input type="text" id="editemail" name="editemail" placeholder="myemail@domain.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="editphonenumber"></label>
+                <input type="text" id="editphonenumber" name="editphonenumber" placeholder="123-456-7890" required>
+            </div>
+
+
+            <div class="button-container">
+                <button type="button" class="btn btn-back" id="backbtn" onclick="returnToSearch()">
+                   Back
+                </button>
+                <button type="button" class="btn btn-add" id="confirmBtn">
+                        Complete
+                </button>
+            </div>
+	</form>
+    </div>
+
+    <script src="js/contact_manager.js"></script>
+</body>
+</html>
+
